@@ -50,7 +50,7 @@ propexists(obj, 'b.f')   // => false
 propexists(obj, 'b.d.e') // => true
 
 // Return the value if prop exists
-propexists(obj, 'b.d.e', { value: true }) // => 0
+propexists(obj, 'b.d.e', { value: true }) // => 100
 
 // Or using array of properties
 propexists(obj, [ 'b', 'd', 'e' ]) // => true
