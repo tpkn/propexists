@@ -5,7 +5,7 @@ Quick check if a nested property exists
 
 ## API
 ```javascript
-propexists(obj, property)
+propexists(obj, property, options)
 ```
 
 
@@ -17,6 +17,12 @@ Target object
 ### property
 **Type**: _String_ | _Array_   
 Property path string `'a.b.c.d'` or an array `['a', 'b', 'c', 'd']`
+
+
+
+### options.value
+**Type**: _Boolean_   
+If `true`, the property value will be returned
 
 
 ### @return
@@ -33,7 +39,7 @@ var obj = {
    b: {
       f: null
       d: {
-         e: 0
+         e: 100
       },
    }
 };
@@ -42,6 +48,9 @@ propexists(obj, 'x')     // => false
 propexists(obj, 'a')     // => true
 propexists(obj, 'b.f')   // => false
 propexists(obj, 'b.d.e') // => true
+
+// Return the value if prop exists
+propexists(obj, 'b.d.e', { value: true }) // => 0
 
 // Or using array of properties
 propexists(obj, [ 'b', 'd', 'e' ]) // => true

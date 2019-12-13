@@ -1,7 +1,7 @@
 /*!
  * propexists, http://tpkn.me/
  */
-function propexists(obj, property){
+function propexists(obj, property, options){
    if(typeof obj !== 'object' || obj === null){
       throw new TypeError('no target object!');
    }
@@ -12,6 +12,8 @@ function propexists(obj, property){
    var level = obj;
    var props = property;
    var result = true;
+   
+   options = options || {};
 
    if(typeof property === 'string'){
       props = property.split('.');
@@ -24,6 +26,10 @@ function propexists(obj, property){
          result = false;
          break;
       }
+   }
+
+   if(options.value){
+      result = level;
    }
 
    return result;
