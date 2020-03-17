@@ -3,10 +3,11 @@
  */
 function propexists(obj, property, options){
    if(typeof obj !== 'object' || obj === null){
-      throw new TypeError('no target object!');
+      return null;
    }
+   
    if(typeof property !== 'string' && !Array.isArray(property)){
-      throw new TypeError('second argument should be a String or an Array!');
+      throw new TypeError('Second argument should be a String or an Array!');
    }
 
    var level = obj;
