@@ -3,7 +3,7 @@
  */
 function propexists(obj, property, options){
    if(typeof obj !== 'object' || obj === null){
-      return null;
+      return false;
    }
    
    if(typeof property !== 'string' && !Array.isArray(property)){
