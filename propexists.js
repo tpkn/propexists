@@ -1,38 +1,44 @@
 /*!
  * propexists, http://tpkn.me/
  */
-function propexists(obj, property, options){
-   if(typeof obj !== 'object' || obj === null){
-      return false;
-   }
-   
+function propexists(obj, property, options = {}){
+   let result;
+
    if(typeof property !== 'string' && !Array.isArray(property)){
       throw new TypeError('Second argument should be a String or an Array!');
    }
 
-   var level = obj;
-   var props = property;
-   var result = true;
+   if(typeof obj !== 'object' || obj === null){
+      return result;
+   }
    
-   options = options || {};
+
+   let { value, fallback } = options;
 
    if(typeof property === 'string'){
-      props = property.split('.');
+      property = property.split('.');
    }
 
-   for(var i = 0, len = props.length; i < len; i++){
-      level = level[props[i]];
-
-      if(level === null || typeof level === 'undefined'){
-         result = false;
+   for(let i = 0, len = property.length, end = len - 1; i < len; i++){
+      obj = obj[property[i]];
+      
+      if(obj === null || typeof obj === 'undefined'){
+         // Set default value if 'result' is null
+         if(value && typeof fallback !== 'undefined'){
+            result = fallback;
+         }
          break;
       }
-   }
 
-   if(options.value){
-      result = level;
+      if(i == end){
+         if(value){
+            result = obj;
+         }else{
+            result = true;
+         }
+      }
    }
-
+   
    return result;
 }
 
